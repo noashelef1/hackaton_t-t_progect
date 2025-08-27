@@ -11,6 +11,7 @@ def get_task_details():
         print("enter the item's " + task_conditions[i])
         message = input(" -> ")  # take input
         task[task_conditions[i]] = message
+
     return message
 
 def client_program():
