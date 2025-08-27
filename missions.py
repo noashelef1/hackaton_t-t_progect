@@ -7,4 +7,3 @@ def research_filter(missions_details_dict, users_filter_dict):
                 missions_filtered_list.append(mission)
 
     return missions_filtered_list
-
