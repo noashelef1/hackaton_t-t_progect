@@ -1,4 +1,6 @@
 import socket
+import missions
+
 item = []
 def server_program():
     host = socket.gethostname()
@@ -26,4 +28,7 @@ def server_program():
 
 if __name__ == '__main__':
     server_program()
-    print(item)
+
+    with open("chores_list.txt", "a") as f:
+        for item in item:
+            f.write(item)
