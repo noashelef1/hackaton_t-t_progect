@@ -1,7 +1,7 @@
 import socket
 import json
 
-task_conditions = ["name","duration"]
+task_conditions = ["name","duration","Tier"]
 task = {task_conditions[0]: "X" , task_conditions[1]: "", task_conditions[2]: ""}
 message = ""
 def get_item_details():
