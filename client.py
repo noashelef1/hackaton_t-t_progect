@@ -1,31 +1,34 @@
 import socket
+import json
+import missions
 
-item = []
+task_conditions = ["Title","duration","category","description","contact_details"]
+task = missions.create_task_dictionary()
+message = ""
+def get_task_details():
+    global message
+    for i in range(len(task_conditions)):
+        print("enter the item's " + task_conditions[i])
+        message = input(" -> ")  # take input
+        task[task_conditions[i]] = message
 
-def server_program():
-    host = socket.gethostname()
-    port = 5000  # initiate port no above 1024
-    server_socket = socket.socket()  # get instance
-    server_socket.bind((host, port))  # bind host address and port together
+    return message
 
-    # configure how many client the server can listen simultaneously
-    server_socket.listen(2)
-    conn, address = server_socket.accept()  # accept new connection
-    print("Connection from: " + str(address))
-    while True:
-        # receive data stream. it won't accept data packet greater than 1024 bytes
-        data = conn.recv(1024).decode()
-        if not data:
-            # if data is not received break
-            break
-        item.append(data)
-        print("from connected user: " + str(data))
-        data = "item was added"
-        conn.send(data.encode())  # send data to the client
+def client_program():
+    host = socket.gethostname()  # as both code is running on same pc
+    port = 5000  # socket server port number
+    client_socket = socket.socket()  # instantiate
+    client_socket.connect((host, port))  # connect to the server
 
-    conn.close()  # close the connection
+
+    get_task_details()
+    json_str = json.dumps(task)
+    bytes_obj = bytes(json_str, 'utf-8')
+    client_socket.send(bytes_obj)
+    data = client_socket.recv(1024).decode()  # receive response
+    print('Received from server: ' + data)  # show in terminal
+    client_socket.close()  # close the connection
 
 
 if __name__ == '__main__':
-    server_program()
-    print(item)
+    client_program()
