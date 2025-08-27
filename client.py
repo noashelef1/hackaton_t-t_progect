@@ -1,10 +1,11 @@
 import socket
 import json
+import missions
 
-task_conditions = ["name","duration"]
-task = {task_conditions[0]: "X" , task_conditions[1]: "", task_conditions[2]: ""}
+task_conditions = ["Title","duration","category","description","contact_details"]
+task = missions.create_task_dictionary()
 message = ""
-def get_item_details():
+def get_task_details():
     global message
     for i in range(len(task_conditions)):
         print("enter the item's " + task_conditions[i])
@@ -19,19 +20,12 @@ def client_program():
     client_socket.connect((host, port))  # connect to the server
 
 
-    get_item_details()
+    get_task_details()
     json_str = json.dumps(task)
     bytes_obj = bytes(json_str, 'utf-8')
-
-
-    adding_another_item = "YES"
-    while adding_another_item == 'YES':
-        client_socket.send(bytes_obj)
-        data = client_socket.recv(1024).decode()  # receive response
-
-        print('Received from server: ' + data)  # show in terminal
-        adding_another_item = input("enter 'YES' to add another item")
-        get_item_details()
+    client_socket.send(bytes_obj)
+    data = client_socket.recv(1024).decode()  # receive response
+    print('Received from server: ' + data)  # show in terminal
     client_socket.close()  # close the connection
 
 
