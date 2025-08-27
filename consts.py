@@ -1,2 +1,2 @@
-tasks_categories = ["cleaning", "cooking", "organizing", "pet care", "errands", "yard work"]
-task_conditions = ["Title", "duration", "category", "description", "contact_details"]
+TASK_CATEGORY = ["cleaning", "cooking", "organizing", "pet care", "errands", "yard work"]
+TASK_CONDITIONS = ["Title", "duration", "category", "description", "contact_details"]
