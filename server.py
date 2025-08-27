@@ -6,7 +6,7 @@ task = {task_conditions[0]: "X" , task_conditions[1]: "", task_conditions[2]: ""
 message = ""
 def get_item_details():
     global message
-    for i in range(len(task_conditions)):
+    for i in range(len(task_conditions)-1):
         print("enter the item's " + task_conditions[i])
         message = input(" -> ")  # take input
         task[task_conditions[i]] = message
