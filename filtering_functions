@@ -3,8 +3,8 @@ def filters_filtering(missions_dict, users_filter_dict):
 
     for mission in missions_dict:
             details_num = 0
-            for filter in users_filter_dict:
-                if filter in mission.key():
+            for current_filter in users_filter_dict.values():
+                if current_filter in mission.key():
                     details_num += 1
             if details_num == len(users_filter_dict):
                 missions_filtered_list.append(mission)
@@ -16,5 +16,5 @@ def filter_key_words(filter_word, missions_details_dict):
     for mission in missions_details_dict:
         if filter_word in missions_details_dict["description"]:
             missions_filtered_list.append(mission)
-    
+
     return missions_filtered_list
